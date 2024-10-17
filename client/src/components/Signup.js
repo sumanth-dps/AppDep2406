@@ -29,7 +29,7 @@ function Signup() {
       body: sendData,
     };
 
-    let jsonData = await fetch("http://localhost:4567/Signup", reqeustOptions);
+    let jsonData = await fetch("/Signup", reqeustOptions);
     let jsoData = await jsonData.json();
 
     console.log(jsoData);

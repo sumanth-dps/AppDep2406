@@ -23,9 +23,7 @@ function EditProfile() {
       lastNameInputRef.current.value = storeObj.loginDetails.lastName;
       emailInputRef.current.value = storeObj.loginDetails.email;
       mobileInputRef.current.value = storeObj.loginDetails.mobile;
-      setprofilePic(
-        `http://localhost:4567/${storeObj.loginDetails.profilePic}`
-      );
+      setprofilePic(`/${storeObj.loginDetails.profilePic}`);
     }
   }, []);
 
@@ -47,7 +45,7 @@ function EditProfile() {
       body: sendData,
     };
 
-    let jsonData = await fetch("http://localhost:4567/update", reqeustOptions);
+    let jsonData = await fetch("/update", reqeustOptions);
     let jsoData = await jsonData.json();
 
     console.log(jsoData);

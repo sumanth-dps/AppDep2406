@@ -5,11 +5,13 @@ const multer = require("multer");
 const jwt = require("jsonwebtoken");
 const dotenv = require("dotenv");
 const bcrypt = require("bcrypt");
+const path = require("node:path");
 dotenv.config();
 
 let app = express();
 app.use(cors());
 app.use("/uploads", express.static("uploads"));
+app.use(express.static(path.join(__dirname, "./client/build")));
 
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
@@ -35,7 +37,9 @@ let userSchema = new mongoose.Schema({
 });
 
 let User = new mongoose.model("user", userSchema);
-
+app.get("*", (req, res) => {
+  res.sendFile("./client/build/index.html");
+});
 app.post("/validateToken", upload.none(), async (req, res) => {
   console.log(req.body);
 
